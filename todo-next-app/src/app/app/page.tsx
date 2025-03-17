@@ -1,3 +1,8 @@
-export default function Page() {
-    return <h1>INITIAL PAGE - when user is logged in</h1>
+import { auth } from "@/services/auth"
+
+export default async function Page() {
+
+    const session = await auth()
+
+    return <h1>User logged in: {session?.user?.email}</h1>
 }
