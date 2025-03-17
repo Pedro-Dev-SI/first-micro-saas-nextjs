@@ -5,6 +5,8 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get('authjs.session-token');
     const pathname = request.nextUrl.pathname;
 
+    console.log(`Middleware: token = ${token?.value}, pathname = ${pathname}`);
+
     if (pathname === '/auth' && token) {
         return NextResponse.redirect(new URL(getUrl('/app')))
     }
@@ -15,5 +17,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).)*'],
-}
+    matcher: ['/auth', '/app'],
+};
